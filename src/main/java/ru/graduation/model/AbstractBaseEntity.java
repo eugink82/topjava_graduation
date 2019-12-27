@@ -1,18 +1,18 @@
 package ru.graduation.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class AbstractBaseEntity {
 
+    @Getter
+    @Setter
     protected Integer id;
 
+    public AbstractBaseEntity() {
+    }
+
     public AbstractBaseEntity(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 

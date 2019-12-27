@@ -1,19 +1,19 @@
 package ru.graduation.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class AbstractNamedEntity extends AbstractBaseEntity {
 
+    @Getter
+    @Setter
     protected String name;
+
+    public AbstractNamedEntity() {
+    }
 
     public AbstractNamedEntity(Integer id, String name) {
         super(id);
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
