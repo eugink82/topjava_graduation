@@ -1,15 +1,9 @@
-DELETE
-FROM user_roles;
-DELETE
-FROM vote;
-DELETE
-FROM users;
-DELETE
-FROM dish;
-DELETE
-FROM menu;
-DELETE
-FROM restaurant;
+DELETE FROM vote;
+DELETE FROM user_roles;
+DELETE FROM users;
+DELETE FROM dish;
+DELETE FROM menu;
+DELETE FROM restaurant;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO users (name, email, password)
@@ -28,10 +22,10 @@ VALUES
   ('Обломов');
 
 
-INSERT INTO menu (date_time, restaurant_id)
+INSERT INTO menu (date, restaurant_id)
 VALUES
-('2019-11-30 01:00:00', 100002),
-('2015-11-30 01:00:00', 100003);
+('2019-11-30', 100002),
+('2015-11-30', 100003);
 
 INSERT INTO dish (name, price, menu_id)
 VALUES
@@ -44,7 +38,7 @@ VALUES
 ('Вишневый морс',80.00, 100005);
 
 
-INSERT INTO vote (user_id, date_time, restaurant_id)
+INSERT INTO vote (user_id, date, restaurant_id)
 VALUES
-(100000, '2019-11-30 09:00:00', 100002),
-(100001, '2019-11-30 10:00:00', 100003);
+(100000, '2019-11-30', 100002),
+(100001, '2019-11-30', 100003);
