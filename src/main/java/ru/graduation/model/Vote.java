@@ -3,6 +3,7 @@ package ru.graduation.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
@@ -15,7 +16,7 @@ public class Vote {
 
     @Getter
     @Setter
-    private LocalDateTime vote_date_time;
+    private LocalDate vote_date;
 
     @Getter
     @Setter
@@ -24,9 +25,9 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(User user, LocalDateTime vote_date_time, Restaurant restaurant) {
+    public Vote(User user, LocalDate vote_date, Restaurant restaurant) {
         this.user = user;
-        this.vote_date_time = vote_date_time;
+        this.vote_date = vote_date;
         this.restaurant = restaurant;
     }
 }
