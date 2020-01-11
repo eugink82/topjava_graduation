@@ -34,24 +34,24 @@ CREATE TABLE restaurant
 CREATE UNIQUE INDEX restaurant_unique_name_idx
   ON restaurant (name);
 
-CREATE TABLE menu
-(
-  id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  date     date NOT NULL,
-  restaurant_id INTEGER   NOT NULL,
-  CONSTRAINT menu_idx UNIQUE (date, restaurant_id),
-  foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
-);
-
 CREATE TABLE dish
 (
   id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  name     VARCHAR NOT NULL,
-  price    DECIMAL NOT NULL,
-  menu_id  INTEGER NOT NULL,
-  CONSTRAINT dish_idx UNIQUE (name, menu_id),
-  foreign key (menu_id) REFERENCES menu (id) ON DELETE CASCADE
+  name     VARCHAR NOT NULL
 );
+CREATE UNIQUE INDEX dish_unique_name_idx ON dish (name);
+
+CREATE TABLE menu
+(
+  restaurant_id INTEGER   NOT NULL,
+  date     date NOT NULL,
+  dish_id  INTEGER   NOT NULL,
+  price    DECIMAL NOT NULL,
+  CONSTRAINT menu_idx UNIQUE (restaurant_id, date,dish_id),
+  foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE,
+  foreign key (dish_id) REFERENCES dish (id) ON DELETE CASCADE
+);
+
 
 CREATE TABLE vote
 (
