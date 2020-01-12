@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS vote;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS dish;
 DROP TABLE IF EXISTS menu;
+DROP TABLE IF EXISTS dish;
 DROP TABLE IF EXISTS restaurant;
 DROP SEQUENCE IF EXISTS global_seq;
 
@@ -48,8 +48,8 @@ CREATE TABLE menu
   dish_id  INTEGER   NOT NULL,
   price    DECIMAL NOT NULL,
   CONSTRAINT menu_idx UNIQUE (restaurant_id, date,dish_id),
-  foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE,
-  foreign key (dish_id) REFERENCES dish (id) ON DELETE CASCADE
+  foreign key (dish_id) REFERENCES dish (id) ON DELETE CASCADE,
+  foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 
 
