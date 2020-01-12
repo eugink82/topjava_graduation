@@ -2,22 +2,34 @@ package ru.graduation.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "dish",uniqueConstraints = {@UniqueConstraint(name="dish_unique_date_name_idx",columnNames ={"date","name"})})
 public class Dish extends AbstractNamedEntity {
 
     @Getter
     @Setter
+    @NotNull
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
     @Getter
     @Setter
+    @NotNull
+    @Range(min=5, max=1500)
     private BigDecimal price;
 
     @Getter
     @Setter
+    @ManyToOne
+    @JoinColumn(name="restaurant_id", nullable = false)
     private Restaurant restaurant;
 
     public Dish() {
@@ -38,9 +50,9 @@ public class Dish extends AbstractNamedEntity {
     public String toString() {
         return "Dish{" +
                 "date=" + date +
-                ", name='" + name +
+                ", name='" + name + '\'' +
                 ", price=" + price +
-                ", restaurant=" + restaurant +'\''+
+                ", restaurant=" + restaurant +
                 '}';
     }
 }

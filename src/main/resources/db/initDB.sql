@@ -43,6 +43,8 @@ CREATE TABLE dish
   foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 
+CREATE UNIQUE INDEX dish_unique_date_name_idx
+  ON dish (date,name);
 
 CREATE TABLE vote
 (
