@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS vote;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS dish;
-DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS restaurant;
 DROP SEQUENCE IF EXISTS global_seq;
 
@@ -34,27 +33,20 @@ CREATE TABLE restaurant
 CREATE UNIQUE INDEX restaurant_unique_name_idx
   ON restaurant (name);
 
-CREATE TABLE menu
+CREATE TABLE dish
 (
-  id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   date     date NOT NULL,
+  name varchar NOT NULL,
+  price DECIMAL,
   restaurant_id INTEGER   NOT NULL,
-  CONSTRAINT menu_idx UNIQUE (date, restaurant_id),
   foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 
-CREATE TABLE dish
-(
-  id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  name     VARCHAR NOT NULL,
-  price    DECIMAL NOT NULL,
-  menu_id  INTEGER NOT NULL,
-  CONSTRAINT dish_idx UNIQUE (name, menu_id),
-  foreign key (menu_id) REFERENCES menu (id) ON DELETE CASCADE
-);
 
 CREATE TABLE vote
 (
+  id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   user_id       INTEGER   NOT NULL,
   date     date NOT NULL,
   restaurant_id INTEGER   NOT NULL,

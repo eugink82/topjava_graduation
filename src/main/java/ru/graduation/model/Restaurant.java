@@ -7,7 +7,7 @@ import java.util.Set;
 public class Restaurant extends AbstractNamedEntity {
 
     @Getter
-    private Set<Menu> menus;
+    private Set<Dish> menus;
 
     @Getter
     private Set<Vote> votes;
