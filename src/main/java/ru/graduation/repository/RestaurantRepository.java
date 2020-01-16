@@ -18,5 +18,4 @@ public interface RestaurantRepository {
 
     Restaurant getWithDishes(int id);
 
-    Restaurant getWithVotes(int id);
 }

@@ -62,14 +62,6 @@ public class RestaurantRepositoryImpl  implements RestaurantRepository{
         return DataAccessUtils.singleResult(restaurants);
     }
 
-    @Override
-    public Restaurant getWithVotes(int id) {
-        Query query=em.createQuery("SELECT distinct r FROM Restaurant r LEFT JOIN FETCH r.votes v WHERE r.id=?1 and v.vote_date=?2", Restaurant.class);
-        setParameters(query,id,DateUtil.CURR_DATE);
-        List<Restaurant> restaurants=query.getResultList();
-        return DataAccessUtils.singleResult(restaurants);
-    }
-
     private void setParameters(Query query,int id,LocalDate date){
         query.setParameter(1,id);
         query.setParameter(2, date);

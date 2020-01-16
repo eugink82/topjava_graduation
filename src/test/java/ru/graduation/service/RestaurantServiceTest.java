@@ -110,14 +110,4 @@ public class RestaurantServiceTest {
         service.getWithDishes(1);
     }
 
-    @Test
-    public void getWithVotes() {
-        Set<Vote> votes=new TreeSet<>(new EntityComparator());
-        Restaurant oblomov=service.getWithVotes(OBLOMOV_ID);
-        votes.addAll(oblomov.getVotes());
-        assertMatch(oblomov,OBLOMOV);
-        assertMatch(votes,VOTE_OBLOMOV_USER,VOTE_OBLOMOV_ADMIN);
-    }
-
-
 }

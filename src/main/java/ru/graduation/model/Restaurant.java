@@ -14,21 +14,16 @@ public class Restaurant extends AbstractNamedEntity {
     @OneToMany(mappedBy = "restaurant")
     private Set<Dish> dishes;
 
-    @Getter
-    @OneToMany(mappedBy = "restaurant")
-    private Set<Vote> votes;
-
     public Restaurant() {
     }
 
     public Restaurant(Restaurant restaurant) {
-        this(restaurant.getId(),restaurant.getName(), restaurant.getDishes(),restaurant.getVotes());
+        this(restaurant.getId(),restaurant.getName(), restaurant.getDishes());
     }
 
-    public Restaurant(Integer id, String name, Set<Dish> dishes,Set<Vote> votes) {
+    public Restaurant(Integer id, String name, Set<Dish> dishes) {
        super(id,name);
        setDishes(dishes);
-       setVotes(votes);
     }
 
     public Restaurant(String name){
@@ -43,9 +38,6 @@ public class Restaurant extends AbstractNamedEntity {
         this.dishes= CollectionUtils.isEmpty(dishes) ? null : dishes;
     }
 
-    public void setVotes(Set<Vote> votes){
-        this.votes= CollectionUtils.isEmpty(votes) ? null : votes;
-    }
 
     @Override
     public String toString() {
@@ -53,7 +45,6 @@ public class Restaurant extends AbstractNamedEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", dishes=" + dishes +
-                ", votes=" + votes +
                 '}';
     }
 }
