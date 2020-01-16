@@ -10,6 +10,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.graduation.model.Vote;
 import ru.graduation.util.DateUtil;
+import ru.graduation.util.exception.DeadLineException;
 
 import java.time.LocalDate;
 
@@ -33,21 +34,24 @@ public class VoteServiceTest {
 
     @Test
     public void getVote(){
-       Vote actualVote=service.getVoteByUserId(USER_ID);
+       Vote actualVote=service.getVoteByUserId(DATE_VOTE,USER_ID);
        assertMatch(actualVote,REVOTE_OBLOMOV_USER);
     }
 
     @Test
-    public void pollExistVote(){
-       Vote actualVote=service.save(REVOTE_TIFLISS_USER,USER_ID);
-        assertMatch(actualVote,REVOTE_TIFLISS_USER);
+    public void reVote(){
+       Vote actualVote=service.save(REVOTE_TIFLISS_DATETIME,USER_ID);
+        assertMatch(actualVote,REVOTE_TIFLISS_DATETIME);
+    }
+
+    @Test(expected = DeadLineException.class)
+    public void reVoteAfterDeadLineTime(){
+        Vote actualVote=service.save(REVOTE_TIFLISS_DEADLINE_TIME,USER_ID);
     }
 
     @Test
-    public void pollVote(){
-       // DateUtil.CURR_DATE= LocalDate.of(2015,12,1);
-        Vote actualVote=service.save(NEW_VOTE_TIFLISS,USER_ID);
-        assertMatch(service.getVoteByUserId(USER_ID),actualVote);
-      //  DateUtil.CURR_DATE= LocalDate.of(2015,11,30);
+    public void newVote(){
+        Vote actualVote=service.save(NEW_VOTE_TIFLISS_NEW_DATETIME,USER_ID);
+        assertMatch(service.getVoteByUserId(NEW_VOTE_TIFLISS_NEW_DATETIME.getVote_date(),USER_ID),actualVote);
     }
 }

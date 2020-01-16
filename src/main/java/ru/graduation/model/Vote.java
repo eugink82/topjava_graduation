@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -31,6 +32,11 @@ public class Vote extends AbstractBaseEntity{
 
     @Getter
     @Setter
+    @Transient
+    private LocalTime vote_time;
+
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name="restaurant_id", nullable=false)
     private Restaurant restaurant;
@@ -45,6 +51,17 @@ public class Vote extends AbstractBaseEntity{
     public Vote(Integer id,Restaurant restaurant){
         super(id);
         this.vote_date= DateUtil.CURR_DATE;
+        this.restaurant=restaurant;
+    }
+
+    public Vote(Restaurant restaurant,LocalDateTime dateTimeVote) {
+        this(null,restaurant,dateTimeVote);
+    }
+
+    public Vote(Integer id,Restaurant restaurant,LocalDateTime dateTimeVote){
+        super(id);
+        this.vote_date= dateTimeVote.toLocalDate();
+        this.vote_time=dateTimeVote.toLocalTime();
         this.restaurant=restaurant;
     }
 

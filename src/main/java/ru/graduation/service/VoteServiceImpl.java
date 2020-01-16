@@ -8,6 +8,7 @@ import ru.graduation.util.DateUtil;
 import ru.graduation.util.ValidationUtil;
 import ru.graduation.util.exception.DeadLineException;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static ru.graduation.util.ValidationUtil.*;
@@ -22,12 +23,12 @@ public class VoteServiceImpl {
     }
 
     public Vote save(Vote vote, int userId){
-        Vote existVote=getVoteByUserId(userId);
+        Vote existVote=getVoteByUserId(vote.getVote_date(),userId);
         if(existVote==null){
             return repository.save(vote,userId);
         }
         else {
-            if (DateUtil.DATETIME_VOTE.toLocalTime().isBefore(LocalTime.of(11, 0)))
+            if (vote.getVote_time().isBefore(LocalTime.of(11, 0)))
                 return repository.save(vote, userId);
             else {
                 throw new DeadLineException("Вы не можете переголосовать - время голосования вышло!");
@@ -35,7 +36,7 @@ public class VoteServiceImpl {
         }
     }
 
-    public Vote getVoteByUserId(int userId){
-        return repository.getVoteByUserId(userId);
+    public Vote getVoteByUserId(LocalDate date, int userId){
+        return repository.getVoteByUserId(date,userId);
     }
 }

@@ -11,6 +11,7 @@ import ru.graduation.util.DateUtil;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -23,7 +24,7 @@ public class VoteRepositoryImpl implements  VoteRepository {
     @Override
     @Transactional
     public Vote save(Vote vote, int userId) {
-        if(!vote.isNew() && getVoteByUserId(userId)==null){
+        if(!vote.isNew() && getVoteByUserId(vote.getVote_date(),userId)==null){
             return null;
         }
         vote.setUser(em.getReference(User.class,userId));
@@ -36,9 +37,9 @@ public class VoteRepositoryImpl implements  VoteRepository {
     }
 
     @Override
-    public Vote getVoteByUserId(int userId) {
+    public Vote getVoteByUserId(LocalDate date, int userId) {
         List<Vote> votes=em.createQuery("select v FROM Vote v where v.vote_date=:date and v.user.id=:userId",Vote.class)
-                .setParameter("date", DateUtil.CURR_DATE)
+                .setParameter("date", date)
                 .setParameter("userId",userId).getResultList();
         return DataAccessUtils.singleResult(votes);
     }
