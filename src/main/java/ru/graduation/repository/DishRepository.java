@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface DishRepository {
 
-    Dish save(Dish dish);
+    Dish save(Dish dish, int restaurantId);
 
-    boolean delete(int id);
+    boolean delete(int id, int restaurantId);
 
-    Dish get(int id);
+    Dish get(int id, int restaurantId);
 
     List<Dish> getDishesByName(String name);
 
-    List<Dish> getMenu(LocalDate date, int restaurant_id);
+    List<Dish> getMenu(LocalDate date, int restaurantId);
 }

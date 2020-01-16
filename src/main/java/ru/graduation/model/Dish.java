@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.graduation.util.DateUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,15 +36,14 @@ public class Dish extends AbstractNamedEntity {
     public Dish() {
     }
 
-    public Dish(LocalDate date, String name, BigDecimal price, Restaurant restaurant) {
-        this(null,date,name,price,restaurant);
+    public Dish(String name, BigDecimal price) {
+        this(null,name,price);
     }
 
-    public Dish(Integer id, LocalDate date, String name, BigDecimal price, Restaurant restaurant) {
+    public Dish(Integer id, String name, BigDecimal price) {
         super(id, name);
-        this.date = date;
+        this.date = DateUtil.CURR_DATE;
         this.price = price;
-        this.restaurant = restaurant;
     }
 
     @Override
