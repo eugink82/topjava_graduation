@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(name = "vote_idx", columnNames = {"user_id","date"})})
+//@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(name = "vote_idx", columnNames = {"user_id","date"})})
 public class Vote extends AbstractBaseEntity{
 
     @Getter
@@ -25,6 +25,7 @@ public class Vote extends AbstractBaseEntity{
     @Setter
     @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @Column(name="date")
     private LocalDate vote_date;
 
     @Getter

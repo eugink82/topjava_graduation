@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "dish",uniqueConstraints = {@UniqueConstraint(name="dish_unique_date_name_idx",columnNames ={"date","name"})})
+@Table(name = "dish",uniqueConstraints = {@UniqueConstraint(name="dish_unique_date_name_restaurant_idx",columnNames ={"date","name","restaurant_id"})})
 public class Dish extends AbstractNamedEntity {
 
     @Getter
@@ -49,10 +49,10 @@ public class Dish extends AbstractNamedEntity {
     @Override
     public String toString() {
         return "Dish{" +
-                "date=" + date +
+                "id="+id+
+                ", date=" + date +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", restaurant=" + restaurant +
                 '}';
     }
 }
