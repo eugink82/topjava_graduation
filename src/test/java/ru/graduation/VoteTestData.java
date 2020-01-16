@@ -15,11 +15,11 @@ import static ru.graduation.model.AbstractBaseEntity.START_SEQ;
 public class VoteTestData {
 
     public static final int OBLOMOV_VOTE_ID=START_SEQ+11;
+    public static final int TIFLISS_VOTE_ID=START_SEQ+12;
 
-    public static final Vote VOTE_OBLOMOV_USER=new Vote(OBLOMOV_VOTE_ID,USER, DateUtil.CURR_DATE,OBLOMOV);
-    public static final Vote VOTE_OBLOMOV_ADMIN=new Vote(OBLOMOV_VOTE_ID+1,ADMIN, DateUtil.CURR_DATE,OBLOMOV);
+    public static final Vote REVOTE_TIFLISS_USER=new Vote(OBLOMOV_VOTE_ID,TIFLISS);
+    public static final Vote REVOTE_OBLOMOV_USER=new Vote(OBLOMOV_VOTE_ID,OBLOMOV);
+    public static final Vote NEW_VOTE_TIFLISS=new Vote(TIFLISS);
+    public static final Vote NEW_VOTE_OBLOMOV=new Vote(OBLOMOV);
 
-    public static void assertMatch(Vote actual, Vote expected) {
-        assertThat(actual).isEqualTo(expected);
-    }
 }

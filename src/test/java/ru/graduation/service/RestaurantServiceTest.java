@@ -23,8 +23,6 @@ import java.util.*;
 import static ru.graduation.DishTestData.*;
 import static ru.graduation.RestaurantTestData.*;
 import static ru.graduation.MatcherTestData.*;
-import static ru.graduation.VoteTestData.VOTE_OBLOMOV_USER;
-import static ru.graduation.VoteTestData.VOTE_OBLOMOV_ADMIN;
 
 
 @ContextConfiguration({

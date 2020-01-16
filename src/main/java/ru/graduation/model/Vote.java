@@ -3,6 +3,7 @@ package ru.graduation.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.graduation.util.DateUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -37,15 +38,16 @@ public class Vote extends AbstractBaseEntity{
     public Vote() {
     }
 
-    public Vote(User user, LocalDate vote_date, Restaurant restaurant) {
-        this(null,user,vote_date,restaurant);
+    public Vote(Restaurant restaurant) {
+        this(null,restaurant);
     }
 
-    public Vote(Integer id,User user, LocalDate vote_date, Restaurant restaurant) {
-        this.user = user;
-        this.vote_date = vote_date;
-        this.restaurant = restaurant;
+    public Vote(Integer id,Restaurant restaurant){
+        super(id);
+        this.vote_date= DateUtil.CURR_DATE;
+        this.restaurant=restaurant;
     }
+
 
     @Override
     public String toString() {
