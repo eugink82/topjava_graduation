@@ -1,21 +1,47 @@
 package ru.graduation.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.graduation.model.Dish;
+import ru.graduation.repository.DishRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface DishService {
+import static ru.graduation.util.ValidationUtil.*;
 
-    Dish create(Dish dish, int restaurant_id);
+@Service
+public class DishService {
 
-    void update(Dish dish, int restaurant_id);
+    private final DishRepository repository;
 
-    void delete(int id, int restaurant_id);
+    public DishService(DishRepository repository) {
+        this.repository = repository;
+    }
 
-    Dish get(int id,  int restaurant_id);
+    public Dish create(Dish dish, int restaurantId) {
+        Assert.notNull(dish, "restaurant must not be null");
+        return repository.save(dish,restaurantId);
+    }
 
-    List<Dish> getDishesByName(String name);
+    public void update(Dish dish, int restaurantId) {
+        Assert.notNull(dish, "restaurant must not be null");
+        checkNotFoundWithId(repository.save(dish,restaurantId),restaurantId);
+    }
 
-    List<Dish> getMenu(LocalDate date, int restaurant_id);
+    public void delete(int id, int restaurantId) {
+        checkNotFoundWithId(repository.delete(id,restaurantId),restaurantId);
+    }
+
+    public Dish get(int id, int restaurantId) {
+        return checkNotFoundWithId(repository.get(id,restaurantId),restaurantId);
+    }
+
+    public List<Dish> getDishesByName(String name) {
+        return null;
+    }
+
+    public List<Dish> getMenu(LocalDate date, int restaurantId) {
+        return repository.getMenu(date,restaurantId);
+    }
 }

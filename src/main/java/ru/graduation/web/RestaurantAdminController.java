@@ -11,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.graduation.model.Restaurant;
 import ru.graduation.service.RestaurantService;
 
-import java.awt.*;
 import java.net.URI;
 import java.util.List;
 

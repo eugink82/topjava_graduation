@@ -14,11 +14,11 @@ import java.time.LocalTime;
 import static ru.graduation.util.ValidationUtil.*;
 
 @Service
-public class VoteServiceImpl {
+public class VoteService {
 
     private VoteRepository repository;
 
-    public VoteServiceImpl(VoteRepository repository) {
+    public VoteService(VoteRepository repository) {
         this.repository = repository;
     }
 

@@ -1,6 +1,5 @@
 package ru.graduation.service;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.graduation.model.Vote;
-import ru.graduation.util.DateUtil;
 import ru.graduation.util.exception.DeadLineException;
 
-import java.time.LocalDate;
-
-import static ru.graduation.RestaurantTestData.*;
 import static ru.graduation.UserTestData.*;
 import static ru.graduation.MatcherTestData.*;
 import static ru.graduation.VoteTestData.*;
@@ -28,7 +23,7 @@ import static ru.graduation.VoteTestData.*;
 public class VoteServiceTest {
 
     @Autowired
-    private VoteServiceImpl service;
+    private VoteService service;
 
    // @Before
 
