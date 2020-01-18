@@ -1,5 +1,7 @@
 package ru.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Getter;
 import org.springframework.util.CollectionUtils;
 
@@ -11,7 +13,7 @@ import java.util.*;
 public class Restaurant extends AbstractNamedEntity {
 
     @Getter
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
     private Set<Dish> dishes;
 
     public Restaurant() {
@@ -44,7 +46,7 @@ public class Restaurant extends AbstractNamedEntity {
         return "Restaurant{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", dishes=" + dishes +
+       //         ", dishes=" + dishes +
                 '}';
     }
 }

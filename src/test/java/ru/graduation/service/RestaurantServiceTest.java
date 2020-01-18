@@ -56,7 +56,7 @@ public class RestaurantServiceTest {
     public void update() {
         Restaurant updated=new Restaurant(OBLOMOV);
         updated.setName("Обломов1");
-        service.update(new Restaurant(updated), OBLOMOV_ID);
+        service.update(new Restaurant(updated));
         assertMatch(service.get(OBLOMOV_ID),updated);
     }
 

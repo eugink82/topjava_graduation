@@ -1,6 +1,5 @@
 package ru.graduation.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.graduation.model.Restaurant;
@@ -26,7 +25,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void update(Restaurant restaurant, int id) {
+    public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "user must not be null");
         checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
     }
@@ -55,5 +54,4 @@ public class RestaurantServiceImpl implements RestaurantService {
     public Restaurant getWithDishes(int id) {
         return checkNotFoundWithId(repository.getWithDishes(id),id);
     }
-
 }

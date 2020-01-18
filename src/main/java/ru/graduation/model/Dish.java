@@ -1,5 +1,6 @@
 package ru.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
@@ -29,7 +30,8 @@ public class Dish extends AbstractNamedEntity {
 
     @Getter
     @Setter
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="restaurant_id", nullable = false)
     private Restaurant restaurant;
 

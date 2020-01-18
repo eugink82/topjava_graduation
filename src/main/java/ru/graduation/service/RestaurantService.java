@@ -1,7 +1,6 @@
 package ru.graduation.service;
 
 import ru.graduation.model.Restaurant;
-import ru.graduation.model.User;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public interface RestaurantService {
 
     Restaurant create(Restaurant restaurant);
 
-    void update(Restaurant restaurant, int id);
+    void update(Restaurant restaurant);
 
     Restaurant get(int id);
 
