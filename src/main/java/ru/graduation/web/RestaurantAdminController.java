@@ -22,28 +22,14 @@ import static ru.graduation.util.ValidationUtil.checkNew;
 @RequestMapping(value=RestaurantAdminController.REST_URL,produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantAdminController {
 
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private RestaurantService service;
 
     public static final String REST_URL="/admin/restaurants";
 
-    @GetMapping
-    public List<Restaurant> getAll(){
-        log.info("getAll");
-        return service.getAll();
-    }
 
-    @GetMapping("/{id}")
-    public Restaurant get(@PathVariable int id, @RequestParam(required = false) boolean getMenu){
-        if(getMenu){
-            log.info("getMenu {}",id);
-            return service.getWithDishes(id);
-        }
-        log.info("get {}",id);
-        return service.get(id);
-    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant){
@@ -71,9 +57,5 @@ public class RestaurantAdminController {
         service.update(restaurant);
     }
 
-    @GetMapping("/by")
-    public Restaurant getByName(@RequestParam String name){
-        log.info("getByName {}", name);
-        return service.getByName(name);
-    }
+
 }
