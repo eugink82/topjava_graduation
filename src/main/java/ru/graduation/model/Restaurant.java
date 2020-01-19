@@ -8,11 +8,12 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.*;
 import java.util.*;
 
+@Getter
 @Entity
 @Table(name = "restaurant",uniqueConstraints = {@UniqueConstraint(name="restaurant_unique_name_idx",columnNames ="name")})
 public class Restaurant extends AbstractNamedEntity {
 
-    @Getter
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
     private Set<Dish> dishes;
 

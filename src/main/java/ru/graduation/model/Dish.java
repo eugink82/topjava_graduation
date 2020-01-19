@@ -12,24 +12,21 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "dish",uniqueConstraints = {@UniqueConstraint(name="dish_unique_date_name_restaurant_idx",columnNames ={"date","name","restaurant_id"})})
 public class Dish extends AbstractNamedEntity {
 
-    @Getter
-    @Setter
+
     @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
-    @Getter
-    @Setter
     @NotNull
     @Range(min=5, max=1500)
     private BigDecimal price;
 
-    @Getter
-    @Setter
     @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="restaurant_id", nullable = false)

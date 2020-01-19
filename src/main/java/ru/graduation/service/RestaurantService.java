@@ -45,6 +45,7 @@ public class RestaurantService {
     }
 
     public Restaurant getWithDishes(int id) {
-        return checkNotFoundWithId(repository.getWithDishes(id),id);
+        Restaurant restaurantWithMenu=repository.getWithDishes(id);
+        return restaurantWithMenu!=null ? restaurantWithMenu : get(id);
     }
 }

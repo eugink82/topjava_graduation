@@ -13,11 +13,11 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 
+@Getter
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "users_unique_email_idx", columnNames = "email")})
 public class User extends AbstractNamedEntity {
 
-    @Getter
     @Setter
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -25,14 +25,12 @@ public class User extends AbstractNamedEntity {
     @Size(max = 100)
     private String email;
 
-    @Getter
     @Setter
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 100)
     private String password;
 
-    @Getter
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")

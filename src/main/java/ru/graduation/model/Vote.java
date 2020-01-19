@@ -13,30 +13,25 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 //@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(name = "vote_idx", columnNames = {"user_id","date"})})
 public class Vote extends AbstractBaseEntity{
 
-    @Getter
-    @Setter
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @Getter
-    @Setter
     @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     @Column(name="date")
     private LocalDate vote_date;
 
-    @Getter
-    @Setter
     @Transient
     private LocalTime vote_time;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name="restaurant_id", nullable=false)
     private Restaurant restaurant;
