@@ -3,6 +3,7 @@ package ru.graduation.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import ru.graduation.model.Dish;
 import ru.graduation.service.DishService;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.List;
 
 import static ru.graduation.util.ValidationUtil.*;
 
@@ -48,6 +51,12 @@ public class DishAdminController {
         log.info("update {}",dish);
         assureIdConsistent(dish,dishId);
         service.update(dish,id);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Dish> getMenuByDate(@RequestParam LocalDate dateMenu, @PathVariable int id){
+//        log.info("getMenu {} by date{ }",dish);
+        return service.getMenu(dateMenu,id);
     }
 
 
