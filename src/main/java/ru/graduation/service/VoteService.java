@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @Service
 public class VoteService {
 
-    public static final LocalTime MAGIC_TIME=LocalTime.of(11,0);
+    public static LocalTime MAGIC_TIME=LocalTime.of(11,0);
 
     private VoteRepository voteRepository;
 
