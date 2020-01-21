@@ -14,6 +14,8 @@ import java.time.LocalTime;
 @Service
 public class VoteService {
 
+    public static final LocalTime MAGIC_TIME=LocalTime.of(11,0);
+
     private VoteRepository voteRepository;
 
     private UserRepository userRepository;
@@ -35,7 +37,7 @@ public class VoteService {
             return voteRepository.save(vote);
         } else if (existVote.getRestaurant().getId() != restaurantId) {
             vote.setId(existVote.getId());
-            if (LocalTime.now().isBefore(LocalTime.of(16, 26))) {
+            if (LocalTime.now().isBefore(MAGIC_TIME)) {
                 vote.setUser(userRepository.get(userId));
                 vote.setRestaurant(restaurantRepository.get(restaurantId));
                 return voteRepository.save(vote);

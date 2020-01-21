@@ -3,9 +3,7 @@ package ru.graduation.repository;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.graduation.model.Dish;
 import ru.graduation.model.Restaurant;
-import ru.graduation.util.DateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,7 +55,7 @@ public class RestaurantRepositoryImpl  implements RestaurantRepository{
     @Override
     public Restaurant getWithDishes(int id) {
         Query query=em.createQuery("SELECT distinct r FROM Restaurant r LEFT JOIN FETCH r.dishes d WHERE r.id=?1 and d.date=?2", Restaurant.class);
-        setParameters(query,id,DateUtil.CURR_DATE);
+        setParameters(query,id,LocalDate.now());
         List<Restaurant> restaurants=query.getResultList();
         return DataAccessUtils.singleResult(restaurants);
     }

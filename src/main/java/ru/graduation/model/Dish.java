@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.graduation.util.DateUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,7 +20,7 @@ public class Dish extends AbstractNamedEntity {
 
     @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-    private LocalDate date;
+    private LocalDate date=LocalDate.now();
 
     @NotNull
     @Range(min=5, max=1500)
@@ -41,7 +40,12 @@ public class Dish extends AbstractNamedEntity {
 
     public Dish(Integer id, String name, BigDecimal price) {
         super(id, name);
-        this.date = DateUtil.CURR_DATE;
+        this.price = price;
+    }
+
+    public Dish(Integer id, LocalDate date,String name, BigDecimal price) {
+        super(id, name);
+        this.date=date;
         this.price = price;
     }
 

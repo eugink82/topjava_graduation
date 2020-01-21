@@ -1,17 +1,13 @@
 package ru.graduation;
 
 import ru.graduation.model.Vote;
-import ru.graduation.util.DateUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static ru.graduation.UserTestData.*;
 import static ru.graduation.RestaurantTestData.*;
-import static ru.graduation.model.AbstractBaseEntity.START_SEQ;
 import static ru.graduation.model.AbstractBaseEntity.START_SEQ;
 
 

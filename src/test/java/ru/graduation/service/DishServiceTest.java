@@ -8,14 +8,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.graduation.DishTestData;
 import ru.graduation.model.Dish;
-import ru.graduation.util.DateUtil;
 import ru.graduation.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static ru.graduation.DishTestData.*;
 import static ru.graduation.RestaurantTestData.*;
 import static ru.graduation.MatcherTestData.*;
@@ -32,13 +30,24 @@ public class DishServiceTest {
     private DishService service;
 
     @Test
-    public void create() {
+    public void createWithNowDate() {
         Dish created= getCreated();
         Dish actualDish=service.create(created,OBLOMOV_ID);
         created.setId(actualDish.getId());
         assertMatch(actualDish,created);
-        assertMatch(service.getMenu(DateUtil.CURR_DATE,OBLOMOV_ID),
+        assertMatch(service.getMenu(LocalDate.now(),OBLOMOV_ID),
                 OBLOMOV_DISH1,OBLOMOV_DISH2,OBLOMOV_DISH3,OBLOMOV_DISH4,created);
+    }
+
+    @Test
+    public void createWithAssignDate() {
+        Dish created= getCreatedWithAssignDate();
+        Dish actualDish=service.create(created,OBLOMOV_ID);
+        created.setId(actualDish.getId());
+        assertMatch(actualDish,created);
+        assertMatch(service.getMenu(ASSIGN_DATE,OBLOMOV_ID),
+                OBLOMOV_DISH1_ASSIGN_DATE,OBLOMOV_DISH2_ASSIGN_DATE,
+                OBLOMOV_DISH3_ASSIGN_DATE,OBLOMOV_DISH4_ASSIGN_DATE,created);
     }
 
     @Test
@@ -51,7 +60,7 @@ public class DishServiceTest {
     @Test
     public void delete() {
         service.delete(DISH_OBLOMOV_ID,OBLOMOV_ID);
-        assertMatch(service.getMenu(DateUtil.CURR_DATE,OBLOMOV_ID),OBLOMOV_DISH2,OBLOMOV_DISH3,OBLOMOV_DISH4);
+        assertMatch(service.getMenu(LocalDate.now(),OBLOMOV_ID),OBLOMOV_DISH2,OBLOMOV_DISH3,OBLOMOV_DISH4);
     }
 
     @Test(expected = NotFoundException.class)
@@ -87,7 +96,7 @@ public class DishServiceTest {
 
     @Test
     public void getMenu() {
-        List<Dish> actualMenu=service.getMenu(DateUtil.CURR_DATE,OBLOMOV_ID);
+        List<Dish> actualMenu=service.getMenu(LocalDate.now(),OBLOMOV_ID);
         assertMatch(actualMenu,OBLOMOV_DISH1,OBLOMOV_DISH2,OBLOMOV_DISH3,OBLOMOV_DISH4);
     }
 }
