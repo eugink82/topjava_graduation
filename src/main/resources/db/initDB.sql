@@ -50,9 +50,8 @@ CREATE TABLE vote
 (
   id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   user_id       INTEGER   NOT NULL,
-  date     date NOT NULL,
+  date     date default now() NOT NULL,
   restaurant_id INTEGER   NOT NULL,
---   CONSTRAINT vote_idx UNIQUE (user_id, date),
   foreign key (user_id) REFERENCES users (id) ON DELETE CASCADE,
   foreign key (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );

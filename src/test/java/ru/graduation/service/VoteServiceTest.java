@@ -33,20 +33,20 @@ public class VoteServiceTest {
        assertMatch(actualVote,REVOTE_OBLOMOV_USER);
     }
 
-    @Test
-    public void reVote(){
-       Vote actualVote=service.save(REVOTE_TIFLISS_DATETIME,USER_ID);
-        assertMatch(actualVote,REVOTE_TIFLISS_DATETIME);
-    }
-
-    @Test(expected = DeadLineException.class)
-    public void reVoteAfterDeadLineTime(){
-        Vote actualVote=service.save(REVOTE_TIFLISS_DEADLINE_TIME,USER_ID);
-    }
-
-    @Test
-    public void newVote(){
-        Vote actualVote=service.save(NEW_VOTE_TIFLISS_NEW_DATETIME,USER_ID);
-        assertMatch(service.getVoteByUserId(NEW_VOTE_TIFLISS_NEW_DATETIME.getVote_date(),USER_ID),actualVote);
-    }
+//    @Test
+//    public void reVote(){
+//       Vote actualVote=service.save(REVOTE_TIFLISS_DATETIME,USER_ID);
+//        assertMatch(actualVote,REVOTE_TIFLISS_DATETIME);
+//    }
+//
+//    @Test(expected = DeadLineException.class)
+//    public void reVoteAfterDeadLineTime(){
+//        Vote actualVote=service.save(REVOTE_TIFLISS_DEADLINE_TIME,USER_ID);
+//    }
+//
+//    @Test
+//    public void newVote(){
+//        Vote actualVote=service.save(NEW_VOTE_TIFLISS_NEW_DATETIME,USER_ID);
+//        assertMatch(service.getVoteByUserId(NEW_VOTE_TIFLISS_NEW_DATETIME.getVote_date(),USER_ID),actualVote);
+//    }
 }

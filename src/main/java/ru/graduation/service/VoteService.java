@@ -1,42 +1,52 @@
 package ru.graduation.service;
 
 import org.springframework.stereotype.Service;
-import ru.graduation.model.Restaurant;
 import ru.graduation.model.Vote;
+import ru.graduation.repository.RestaurantRepository;
+import ru.graduation.repository.UserRepository;
 import ru.graduation.repository.VoteRepository;
-import ru.graduation.util.DateUtil;
-import ru.graduation.util.ValidationUtil;
 import ru.graduation.util.exception.DeadLineException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static ru.graduation.util.ValidationUtil.*;
 
 @Service
 public class VoteService {
 
-    private VoteRepository repository;
+    private VoteRepository voteRepository;
 
-    public VoteService(VoteRepository repository) {
-        this.repository = repository;
+    private UserRepository userRepository;
+
+    private RestaurantRepository restaurantRepository;
+
+    public VoteService(VoteRepository voteRepository, UserRepository userRepository, RestaurantRepository restaurantRepository) {
+        this.voteRepository = voteRepository;
+        this.userRepository = userRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
-    public Vote save(Vote vote, int userId){
-        Vote existVote=getVoteByUserId(vote.getVote_date(),userId);
-        if(existVote==null){
-            return repository.save(vote,userId);
-        }
-        else {
-            if (vote.getVote_time().isBefore(LocalTime.of(11, 0)))
-                return repository.save(vote, userId);
-            else {
+    public Vote save(int restaurantId, int userId) {
+        Vote vote = new Vote();
+        Vote existVote = getVoteByUserId(LocalDate.now(), userId);
+        if (existVote == null) {
+            vote.setUser(userRepository.get(userId));
+            vote.setRestaurant(restaurantRepository.get(restaurantId));
+            return voteRepository.save(vote);
+        } else if (existVote.getRestaurant().getId() != restaurantId) {
+            vote.setId(existVote.getId());
+            if (LocalTime.now().isBefore(LocalTime.of(16, 26))) {
+                vote.setUser(userRepository.get(userId));
+                vote.setRestaurant(restaurantRepository.get(restaurantId));
+                return voteRepository.save(vote);
+            } else {
                 throw new DeadLineException("Вы не можете переголосовать - время голосования вышло!");
             }
         }
+        return existVote;
     }
 
-    public Vote getVoteByUserId(LocalDate date, int userId){
-        return repository.getVoteByUserId(date,userId);
+    public Vote getVoteByUserId(LocalDate date, int userId) {
+        return voteRepository.getVoteByUserId(date, userId);
     }
 }

@@ -3,14 +3,10 @@ package ru.graduation.repository;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.graduation.model.Restaurant;
-import ru.graduation.model.User;
 import ru.graduation.model.Vote;
-import ru.graduation.util.DateUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,12 +19,7 @@ public class VoteRepositoryImpl implements  VoteRepository {
 
     @Override
     @Transactional
-    public Vote save(Vote vote, int userId) {
-        if(!vote.isNew() && getVoteByUserId(vote.getVote_date(),userId)==null){
-            return null;
-        }
-        vote.setUser(em.getReference(User.class,userId));
-        vote.setRestaurant(em.getReference(Restaurant.class,vote.getRestaurant().getId()));
+    public Vote save(Vote vote) {
         if(vote.isNew()){
             em.persist(vote);
             return vote;
@@ -38,7 +29,7 @@ public class VoteRepositoryImpl implements  VoteRepository {
 
     @Override
     public Vote getVoteByUserId(LocalDate date, int userId) {
-        List<Vote> votes=em.createQuery("select v FROM Vote v where v.vote_date=:date and v.user.id=:userId",Vote.class)
+        List<Vote> votes=em.createQuery("select v FROM Vote v where v.voteDate=:date and v.user.id=:userId",Vote.class)
                 .setParameter("date", date)
                 .setParameter("userId",userId).getResultList();
         return DataAccessUtils.singleResult(votes);

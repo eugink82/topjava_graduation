@@ -2,16 +2,12 @@ package ru.graduation.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-import ru.graduation.util.DateUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -25,12 +21,11 @@ public class Vote extends AbstractBaseEntity{
     private User user;
 
     @NotNull
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-    @Column(name="date")
-    private LocalDate vote_date;
+    @Column(name="date",columnDefinition = "date default now()")
+    private LocalDate voteDate=LocalDate.now();
 
     @Transient
-    private LocalTime vote_time;
+    private LocalTime voteTime=LocalTime.now();
 
     @ManyToOne
     @JoinColumn(name="restaurant_id", nullable=false)
@@ -45,7 +40,6 @@ public class Vote extends AbstractBaseEntity{
 
     public Vote(Integer id,Restaurant restaurant){
         super(id);
-        this.vote_date= DateUtil.CURR_DATE;
         this.restaurant=restaurant;
     }
 
@@ -55,8 +49,8 @@ public class Vote extends AbstractBaseEntity{
 
     public Vote(Integer id,Restaurant restaurant,LocalDateTime dateTimeVote){
         super(id);
-        this.vote_date= dateTimeVote.toLocalDate();
-        this.vote_time=dateTimeVote.toLocalTime();
+        this.voteDate= dateTimeVote.toLocalDate();
+        this.voteTime=dateTimeVote.toLocalTime();
         this.restaurant=restaurant;
     }
 
@@ -66,7 +60,7 @@ public class Vote extends AbstractBaseEntity{
         return "Vote{" +
                 "id=" + id +
                 ", user=" + user +
-                ", vote_date=" + vote_date +
+                ", vote_date=" + voteDate +
                 ", restaurant=" + restaurant +
                 '}';
     }
