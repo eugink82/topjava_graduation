@@ -1,9 +1,10 @@
-package ru.graduation.repository;
+package ru.graduation.repository.jpa;
 
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.graduation.model.Restaurant;
+import ru.graduation.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,9 +12,9 @@ import javax.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
 
-@Repository
+//@Repository
 @Transactional(readOnly = true)
-public class RestaurantRepositoryImpl  implements RestaurantRepository{
+public class RestaurantRepositoryImpl  implements RestaurantRepository {
 
     @PersistenceContext
     private EntityManager em;

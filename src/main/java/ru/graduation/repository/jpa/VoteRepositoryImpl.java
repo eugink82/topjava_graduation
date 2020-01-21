@@ -1,18 +1,19 @@
-package ru.graduation.repository;
+package ru.graduation.repository.jpa;
 
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.graduation.model.Vote;
+import ru.graduation.repository.VoteRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
 
-@Repository
+//@Repository
 @Transactional(readOnly = true)
-public class VoteRepositoryImpl implements  VoteRepository {
+public class VoteRepositoryImpl implements VoteRepository {
 
     @PersistenceContext
     EntityManager em;

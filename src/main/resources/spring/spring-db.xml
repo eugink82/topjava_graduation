@@ -4,10 +4,12 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
@@ -15,7 +17,9 @@
         <property name="staticMethod" value="org.slf4j.bridge.SLF4JBridgeHandler.install" />
     </bean>
 
-    <context:component-scan base-package="ru.graduation.repository"/>
+    <!--<context:component-scan base-package="ru.graduation.repository.data"/>-->
+    <context:component-scan base-package="ru.graduation.repository.datajpa"/>
+    <jpa:repositories base-package="ru.graduation.repository.datajpa"/>
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:db/initDB.sql"/>

@@ -1,15 +1,16 @@
-package ru.graduation.repository;
+package ru.graduation.repository.jpa;
 
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.graduation.model.User;
+import ru.graduation.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
+//@Repository
 @Transactional(readOnly = true)
 public class UserRepositoryImpl implements UserRepository {
 
