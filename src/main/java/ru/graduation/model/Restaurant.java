@@ -13,7 +13,6 @@ import java.util.*;
 @Table(name = "restaurant",uniqueConstraints = {@UniqueConstraint(name="restaurant_unique_name_idx",columnNames ="name")})
 public class Restaurant extends AbstractNamedEntity {
 
-
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
     private Set<Dish> dishes;
 

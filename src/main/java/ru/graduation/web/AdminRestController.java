@@ -3,6 +3,7 @@ package ru.graduation.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,7 @@ public class AdminRestController {
     }
 
     @PutMapping(value="/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody User user,@PathVariable int id){
         log.info("update {}",id);
         assureIdConsistent(user,id);
@@ -44,6 +46,7 @@ public class AdminRestController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id){
         log.info("update {}",id);
         service.delete(id);
@@ -53,6 +56,18 @@ public class AdminRestController {
     public List<User> getAll(){
         log.info("getAll {}");
        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public User get(@PathVariable int id){
+        log.info("get {}",id);
+        return service.get(id);
+    }
+
+    @GetMapping("/by")
+    public User getByEmail(@RequestParam String email){
+        log.info("getByEmail {}",email);
+        return service.getByEmail(email);
     }
 
 }

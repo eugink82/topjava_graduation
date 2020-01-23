@@ -24,19 +24,20 @@ public class VoteController {
     @Autowired
     private VoteService service;
 
-    public static final String VOTE_URL="/restaurants/{id}/votes";
+    public static final String VOTE_URL="/profile/votes";
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Vote> vote(@PathVariable int id){
         Vote created=service.save(id,SecurityUtil.authUserId());
         URI uriOfNewResource= ServletUriComponentsBuilder.fromCurrentContextPath()
-                .buildAndExpand(VOTE_URL+"/{newId}",id,created.getId()).toUri();
+                .buildAndExpand(VOTE_URL+"/{id}",id).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public VoteTo getMyVote(){
-        return new VoteTo(service.getVoteByUserId(LocalDate.now(),SecurityUtil.authUserId()));
+        Vote myVote=service.getVoteByUserId(LocalDate.now(),SecurityUtil.authUserId());
+        return myVote!=null ? new VoteTo(myVote) : null;
     }
 
 }

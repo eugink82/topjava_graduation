@@ -3,6 +3,7 @@ package ru.graduation.to;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 import ru.graduation.model.Vote;
 
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ public class VoteTo {
 
     private String name;
 
-    public VoteTo(Vote vote) {
+    public VoteTo(@Nullable Vote vote) {
         this.id = vote.getId();
         this.email=vote.getUser().getEmail();
         this.date = vote.getVoteDate();

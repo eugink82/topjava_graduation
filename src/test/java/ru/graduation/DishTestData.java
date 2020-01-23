@@ -4,6 +4,8 @@ import ru.graduation.model.Dish;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import static ru.graduation.model.AbstractBaseEntity.*;
 
@@ -38,6 +40,9 @@ public class DishTestData {
     public static final Dish OBLOMOV_DISH4_ASSIGN_DATE=new Dish(DISH_OBLOMOV_ID+8,ASSIGN_DATE,
             "Квас",new BigDecimal("220.00"));
 
+    public static final List<Dish> LIST_DISH_ASSIGN_DATE= Arrays.asList(OBLOMOV_DISH1_ASSIGN_DATE,
+            OBLOMOV_DISH2_ASSIGN_DATE,OBLOMOV_DISH3_ASSIGN_DATE,OBLOMOV_DISH4_ASSIGN_DATE);
+
 
     public static Dish getCreated() {
         return new Dish(null,"Цепелинай", new BigDecimal("114.00"));
@@ -50,7 +55,7 @@ public class DishTestData {
     }
 
     public static Dish getUpdated() {
-        return new Dish(100009,"Свекольник", new BigDecimal("190.00"));
+        return new Dish(DISH_OBLOMOV_ID,"Свекольник", new BigDecimal("190.00"));
     }
 
 
