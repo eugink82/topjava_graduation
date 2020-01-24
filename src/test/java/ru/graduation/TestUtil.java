@@ -1,8 +1,11 @@
 package ru.graduation;
 
 
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
+import ru.graduation.model.User;
 import ru.graduation.web.json.JsonUtil;
 
 import java.io.UnsupportedEncodingException;
@@ -23,5 +26,9 @@ public class TestUtil {
 
     public static <T> List<T> readListFromJsonMvcResult(MvcResult result, Class<T> clazz) throws UnsupportedEncodingException {
         return JsonUtil.readValues(getContent(result), clazz);
+    }
+
+    public static RequestPostProcessor userHttpBasic(User user){
+        return SecurityMockMvcRequestPostProcessors.httpBasic(user.getEmail(),user.getPassword());
     }
 }

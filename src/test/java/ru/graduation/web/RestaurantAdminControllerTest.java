@@ -16,6 +16,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.graduation.MatcherTestData.assertMatch;
 import static ru.graduation.MatcherTestData.assertMatchList;
 import static ru.graduation.RestaurantTestData.*;
+import static ru.graduation.TestUtil.userHttpBasic;
+import static ru.graduation.UserTestData.ADMIN;
+import static ru.graduation.UserTestData.USER;
 
 public class RestaurantAdminControllerTest extends AbstractControllerTest{
 
@@ -29,6 +32,7 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest{
         Restaurant expected=new Restaurant("Хуторок");
         ResultActions action=mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(expected)))
                 .andExpect(status().isCreated());
 
@@ -42,7 +46,8 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest{
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL+OBLOMOV_ID))
+        mockMvc.perform(delete(REST_URL+OBLOMOV_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isNoContent());
         assertMatchList(service.getAll(),TIFLISS);
 
@@ -55,8 +60,22 @@ public class RestaurantAdminControllerTest extends AbstractControllerTest{
         expected.setName("Венский вальс");
         mockMvc.perform(put(REST_URL+OBLOMOV_ID)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(expected)))
                 .andExpect(status().isNoContent());
         assertMatch(service.get(OBLOMOV_ID),expected);
+    }
+
+    @Test
+    public void getUnAuth() throws Exception{
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void getForbidden() throws Exception{
+        mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isForbidden());
     }
 }

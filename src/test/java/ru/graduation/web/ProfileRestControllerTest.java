@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.graduation.MatcherTestData.assertMatch;
 import static ru.graduation.MatcherTestData.assertMatchList;
+import static ru.graduation.TestUtil.userHttpBasic;
 import static ru.graduation.UserTestData.*;
 
 public class ProfileRestControllerTest extends AbstractControllerTest{
@@ -24,7 +25,8 @@ public class ProfileRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL))
+        mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(USER));
@@ -35,6 +37,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest{
        User created=new User(USER_ID,"Gleban","Gleb@rambler.ru","qwerty45", Role.ROLE_USER);
        mockMvc.perform(put(REST_URL)
                .contentType(MediaType.APPLICATION_JSON)
+               .with(userHttpBasic(USER))
                .content(JsonUtil.writeValue(created)))
                .andExpect(status().isNoContent());
        assertMatch(service.getByEmail("Gleb@rambler.ru"),created);
@@ -42,8 +45,15 @@ public class ProfileRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testDelete() throws Exception{
-        mockMvc.perform(delete(REST_URL))
+        mockMvc.perform(delete(REST_URL)
+                .with(userHttpBasic(USER)))
                 .andExpect(status().isNoContent());
         assertMatchList(service.getAll(),ADMIN);
+    }
+
+    @Test
+    public void getUnAuth() throws Exception{
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
     }
 }
