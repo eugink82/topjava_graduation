@@ -20,7 +20,7 @@ public class RestaurantUserController {
     @Autowired
     private RestaurantService service;
 
-    public static final String REST_URL="/restaurants";
+    public static final String REST_URL="/profile/restaurants";
 
     @GetMapping
     public List<Restaurant> getAll(@RequestParam(required = false) boolean withMenu){

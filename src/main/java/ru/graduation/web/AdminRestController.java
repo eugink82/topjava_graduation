@@ -33,7 +33,8 @@ public class AdminRestController {
         checkNew(user);
         User created=service.create(user);
         URI uriOfNewResorces= ServletUriComponentsBuilder.fromCurrentContextPath()
-                .buildAndExpand(AdminRestController.ADMIN_URL+"/{id}",created.getId()).toUri();
+                .path(AdminRestController.ADMIN_URL+"/{id}")
+                .buildAndExpand(created.getId()).toUri();
         return  ResponseEntity.created(uriOfNewResorces).body(created);
     }
 
