@@ -3,8 +3,12 @@ package ru.graduation.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.graduation.AuthorizedUser;
 import ru.graduation.model.User;
 import ru.graduation.repository.UserRepository;
 
@@ -12,8 +16,8 @@ import java.util.List;
 
 import static ru.graduation.util.ValidationUtil.*;
 
-@Service
-public class UserService {
+@Service("userService")
+public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
 
@@ -47,5 +51,14 @@ public class UserService {
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
         checkNotFoundWithId(repository.save(user), user.getId());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user=repository.getByEmail(email);
+        if(user==null){
+            throw new UsernameNotFoundException("Пользователь "+email+" не найден!");
+        }
+        return new AuthorizedUser(user);
     }
 }
