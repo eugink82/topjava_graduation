@@ -12,8 +12,8 @@ import static ru.graduation.model.AbstractBaseEntity.*;
 public class DishTestData {
     public static final LocalDate ASSIGN_DATE=LocalDate.now().plusDays(1);
 
-    public static final int DISH_TIFLIS_ID= START_SEQ+4;
-    public static final int DISH_OBLOMOV_ID= START_SEQ+7;
+    public static final int DISH_TIFLIS_ID= START_SEQ+6;
+    public static final int DISH_OBLOMOV_ID= START_SEQ+9;
 
     public static final Dish OBLOMOV_DISH1=new Dish(DISH_OBLOMOV_ID,
             "Маринованная селедка с овощами",new BigDecimal("160.00"));

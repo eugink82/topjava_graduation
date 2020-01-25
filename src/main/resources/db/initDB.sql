@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS user_roles;
+Drop VIEW IF EXISTS history_votes;
 DROP TABLE IF EXISTS vote;
 DROP TABLE IF EXISTS users;
+DROP VIEW IF EXISTS history_menu;
 DROP TABLE IF EXISTS dish;
 DROP TABLE IF EXISTS restaurant;
 DROP SEQUENCE IF EXISTS global_seq;
@@ -58,3 +60,13 @@ CREATE TABLE vote
 
 CREATE UNIQUE INDEX vote_idx
   ON vote (user_id, date);
+
+
+create view history_votes as
+select  row_number() OVER () AS id,name,date,count(*) from restaurant r inner join vote v on r.id=v.restaurant_id
+group by name,date
+order by date desc;
+
+create view history_menu as
+select  row_number() OVER () AS id,r.name,date,d.name as name_dish,d.price
+from restaurant r inner join dish d on r.id=d.restaurant_id
