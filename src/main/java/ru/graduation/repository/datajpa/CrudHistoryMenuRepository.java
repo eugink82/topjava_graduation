@@ -10,5 +10,8 @@ import java.util.List;
 public interface CrudHistoryMenuRepository extends JpaRepository<HistoryMenu,Integer> {
 
     @Query("select h from HistoryMenu h where h.date=?1")
-    public List<HistoryMenu> getMenuByDate(LocalDate date);
+    public List<HistoryMenu> findAllMenuByDate(LocalDate date);
+
+    @Query("select h from HistoryMenu h order by h.date desc,h.name asc")
+    public List<HistoryMenu> findAll();
 }

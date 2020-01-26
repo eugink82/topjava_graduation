@@ -2,7 +2,6 @@ package ru.graduation.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Immutable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,5 +18,5 @@ public class HistoryVotes extends AbstractNamedEntity{
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
-    private int count;
+    private int votes;
 }
