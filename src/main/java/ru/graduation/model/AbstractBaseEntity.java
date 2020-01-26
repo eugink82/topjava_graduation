@@ -1,18 +1,16 @@
 package ru.graduation.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.*;
 
 @Getter
 @Setter
 @MappedSuperclass
 @Access(AccessType.FIELD)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE,isGetterVisibility = NONE,setterVisibility = NONE)
+//@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE,isGetterVisibility = NONE,setterVisibility = NONE)
 public abstract class AbstractBaseEntity {
 
     public static final int START_SEQ = 100000;

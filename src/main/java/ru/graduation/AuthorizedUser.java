@@ -1,9 +1,7 @@
 package ru.graduation;
 
-import org.springframework.security.core.GrantedAuthority;
 import ru.graduation.model.User;
 
-import java.util.Collection;
 
 public class AuthorizedUser extends  org.springframework.security.core.userdetails.User{
     private static final long serialVersionUID = 1L;

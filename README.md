@@ -23,6 +23,17 @@
 
 Он должен содержать код и README.md с документацией API и командами curl для получения данных для голосования и голосования.
 
+### Объектная модель проекта:
+1. Dish - блюдо. Блюда за определенную дату по одному ресторану образуют меню
+2. Restaurant - ресторан
+3. User - пользователь
+4. Role - роль пользователя (ROLE_USER или ROLE_ADMIN)
+5. Vote - голос (голос пользователя за ресторан на определенную дату)
+6. HistoryMenu - история меню ресторанов
+7. HistoryVotes - история голосования.
+
+Для репозитория было использовано 2 технологии: Hibernate и Spring Data Jpa (используется по умолчанию)
+Обмен с фронтенд идет через формат JSON.
 
 ### Пользователи:
 #### 1) Операции со своей учетной записью:
@@ -120,7 +131,7 @@ GET .../profile/history/votes
 
 ### Администраторы:
 
-#### 1)Администрирование пользователей
+#### 1)Редактирование пользователей
 
 - Создание пользователя:
 POST .../admin/users
@@ -147,7 +158,7 @@ GET /admin/users
 
 [{"id":100001,"name":"Admin","email":"admin@gmail.com","password":"admin","roles":["ROLE_ADMIN","ROLE_USER"]},{"id":100036,"name":"DenisDK","email":"DenisDK@rambler.ru","password":"yaDeny","roles":["ROLE_USER"]},{"id":100003,"name":"Nick","email":"Nick@rambler.ru","password":"pass","roles":["ROLE_USER"]},{"id":100002,"name":"Serge85","email":"serge85@mail.ru","password":"qwerty","roles":["ROLE_USER"]},{"id":100000,"name":"User","email":"user@yandex.ru","password":"password","roles":["ROLE_USER"]}]
 
-#### 2)Администрирование ресторанов
+#### 2)Редактирование ресторанов
 
 - Создание ресторана:
 POST .../admin/restaurants
@@ -158,7 +169,7 @@ PUT  .../admin/restaurants/{100004}
 - Удаление ресторана:
 DELETE .../admin/restaurants/{100004}
 
-#### 3)Администрирование меню ресторанов:
+#### 3)Редактирование меню ресторанов:
 
 - Создание блюда меню:
 POST  .../admin/restaurants/100004/dishes

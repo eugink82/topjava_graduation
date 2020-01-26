@@ -72,7 +72,7 @@ public class DishAdminControllerTest extends AbstractControllerTest {
         mockMvc.perform(get(REST_URL+"?dateMenu=",OBLOMOV_ID,LocalDate.now().plusDays(1))
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk());
-        assertMatch(service.getMenu(LocalDate.now().plusDays(1),OBLOMOV_ID),LIST_DISH_ASSIGN_DATE);
+        assertMatch(service.getMenu(LocalDate.now().minusDays(1),OBLOMOV_ID),LIST_DISH_ASSIGN_DATE);
     }
 
     @Test

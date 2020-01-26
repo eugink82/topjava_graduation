@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Setter
 @Getter
@@ -24,7 +23,4 @@ public class HistoryMenu extends AbstractNamedEntity {
     private String nameDish;
 
     private BigDecimal price;
-
-//    @OneToMany
-//    private List<Dish> dishes;
 }

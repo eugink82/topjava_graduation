@@ -10,7 +10,7 @@ import java.util.List;
 import static ru.graduation.model.AbstractBaseEntity.*;
 
 public class DishTestData {
-    public static final LocalDate ASSIGN_DATE=LocalDate.now().plusDays(1);
+    public static final LocalDate ASSIGN_DATE=LocalDate.now().minusDays(1);
 
     public static final int DISH_TIFLIS_ID= START_SEQ+6;
     public static final int DISH_OBLOMOV_ID= START_SEQ+9;

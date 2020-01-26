@@ -12,7 +12,6 @@ import ru.graduation.model.Restaurant;
 import ru.graduation.service.RestaurantService;
 
 import java.net.URI;
-import java.util.List;
 
 import static ru.graduation.util.ValidationUtil.assureIdConsistent;
 import static ru.graduation.util.ValidationUtil.checkNew;

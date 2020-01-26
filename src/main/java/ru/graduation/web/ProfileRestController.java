@@ -44,6 +44,4 @@ public class ProfileRestController {
         log.info("delete User with id={}", id);
         service.delete(id);
     }
-
-
 }

@@ -39,5 +39,4 @@ public class VoteController {
         Vote myVote=service.getVoteByUserId(LocalDate.now(),SecurityUtil.authUserId());
         return myVote!=null ? new VoteTo(myVote) : null;
     }
-
 }

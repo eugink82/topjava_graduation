@@ -38,7 +38,7 @@ public class UserServiceTest {
         User created = service.create(newUser);
         newUser.setId(created.getId());
         assertMatch(created, newUser);
-        assertMatch(service.getAll(), ADMIN, newUser, USER);
+        assertMatch(service.getAll(), ADMIN, newUser,NICK, SERGE85,USER);
     }
 
     @Test(expected = DataAccessException.class)
@@ -49,7 +49,7 @@ public class UserServiceTest {
     @Test
     public void delete() throws Exception {
         service.delete(USER_ID);
-        assertMatchList(service.getAll(), ADMIN);
+        assertMatch(service.getAll(), ADMIN,NICK,SERGE85);
     }
 
     @Test(expected = NotFoundException.class)
@@ -85,6 +85,6 @@ public class UserServiceTest {
     @Test
     public void getAll() throws Exception {
         List<User> all = service.getAll();
-        assertMatch(all, ADMIN, USER);
+        assertMatch(all, ADMIN,NICK,SERGE85,USER);
     }
 }

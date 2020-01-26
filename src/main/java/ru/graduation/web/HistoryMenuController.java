@@ -32,6 +32,4 @@ public class HistoryMenuController {
     public List<HistoryMenuTo> getHistoryMenuByDate(@PathVariable LocalDate date){
         return service.getHistoryMenuByDate(date);
     }
-
-
 }

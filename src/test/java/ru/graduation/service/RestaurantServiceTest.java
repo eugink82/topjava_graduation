@@ -11,11 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.graduation.VoteTestData;
+import ru.graduation.model.AbstractBaseEntity;
 import ru.graduation.model.Dish;
 import ru.graduation.model.Restaurant;
-import ru.graduation.model.Vote;
-import ru.graduation.util.EntityComparator;
 import ru.graduation.util.exception.NotFoundException;
 
 import java.util.*;
@@ -34,6 +32,8 @@ import static ru.graduation.MatcherTestData.*;
 public class RestaurantServiceTest {
 
     private static final Logger log = LoggerFactory.getLogger(RestaurantServiceTest.class);
+
+    private static final Comparator<AbstractBaseEntity> ENTITY_COMPARATOR=Comparator.comparing(AbstractBaseEntity::getId);
 
     @Autowired
     private RestaurantService service;
@@ -95,7 +95,7 @@ public class RestaurantServiceTest {
 
     @Test
     public void getWithDishes() {
-       Set<Dish> dishes=new TreeSet<>(new EntityComparator());
+       Set<Dish> dishes=new TreeSet<>(ENTITY_COMPARATOR);
        Restaurant oblomov=service.getWithDishes(OBLOMOV_ID);
        dishes.addAll(oblomov.getDishes());
        Assertions.assertThat(oblomov).isEqualTo(OBLOMOV);
