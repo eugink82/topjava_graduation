@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @Table(name="history_menu")
 public class HistoryMenu extends AbstractNamedEntity {
 
-    @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
 

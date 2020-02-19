@@ -26,11 +26,11 @@ public class VoteController {
 
     public static final String VOTE_URL="/profile/votes";
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Vote> vote(@PathVariable int id){
-        Vote created=service.save(id,SecurityUtil.authUserId());
+    @PutMapping//("/{id}")
+    public ResponseEntity<Vote> vote(@RequestParam int restaurantId){
+        Vote created=service.save(restaurantId,SecurityUtil.authUserId());
         URI uriOfNewResource= ServletUriComponentsBuilder.fromCurrentContextPath()
-                .buildAndExpand(VOTE_URL+"/{id}",id).toUri();
+                .buildAndExpand(VOTE_URL+"/{id}").toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 

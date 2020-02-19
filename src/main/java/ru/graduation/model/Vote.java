@@ -19,7 +19,6 @@ public class Vote extends AbstractBaseEntity{
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @NotNull
     @Column(name="date",columnDefinition = "date default now()")
     private LocalDate voteDate=LocalDate.now();
 

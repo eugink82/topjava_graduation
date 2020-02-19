@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Table(name = "history_votes")
 public class HistoryVotes extends AbstractNamedEntity{
 
-    @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
 

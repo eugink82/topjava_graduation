@@ -17,13 +17,9 @@ import java.time.LocalDate;
 @Table(name = "dish",uniqueConstraints = {@UniqueConstraint(name="dish_unique_date_name_restaurant_idx",columnNames ={"date","name","restaurant_id"})})
 public class Dish extends AbstractNamedEntity {
 
-
-    @NotNull
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date=LocalDate.now();
 
-    @NotNull
-    @Range(min=5, max=1500)
     private BigDecimal price;
 
     @JsonIgnore

@@ -30,7 +30,7 @@ public class VoteControllerTest extends AbstractControllerTest {
     public void vote() throws Exception{
         Vote newVote=VOTE_OBLOMOV;
         newVote.setUser(USER);
-        ResultActions action=mockMvc.perform(put(VOTE_URL+OBLOMOV_ID)
+        ResultActions action=mockMvc.perform(put(VOTE_URL+"?restaurantId="+OBLOMOV_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(newVote)))

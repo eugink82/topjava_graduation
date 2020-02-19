@@ -2,6 +2,7 @@ package ru.graduation.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.graduation.model.Dish;
 import ru.graduation.repository.DishRepository;
 
@@ -18,6 +19,7 @@ public class DishRepositorySpringData implements DishRepository {
     private CrudRestaurantRepository crudRestaurantRepository;
 
     @Override
+    @Transactional
     public Dish save(Dish dish, int restaurantId) {
         if(!dish.isNew() && get(dish.getId(),restaurantId)==null){
             return null;
